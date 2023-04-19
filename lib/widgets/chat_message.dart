@@ -15,15 +15,14 @@ class ChatMessage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: 70,
+          width: 45,
           height: 45,
-          child: Text(sender,overflow: TextOverflow.ellipsis,)
-              .text
+          child: Text(sender[0],overflow: TextOverflow.ellipsis,maxLines: 1)
+              .text.semiBold.white.capitalize.isIntrinsic
               .subtitle1(context)
               .make()
               .box
               .color(isSender?Vx.red100:Vx.purple200)
-              .p16
               .roundedSM
               .alignCenter
               .makeCentered(),

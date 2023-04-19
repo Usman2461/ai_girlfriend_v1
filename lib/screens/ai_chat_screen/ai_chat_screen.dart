@@ -70,7 +70,7 @@ class _AIChatScreenState extends State<AIChatScreen> {
     try {
       subscription = openAI!
           .build(
-        token: "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",
+        token: "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",
         baseOption: HttpSetup(receiveTimeout: 10000, connectTimeout: 10000),
       )
           .onCompleteStream(request: request)
@@ -121,7 +121,7 @@ class _AIChatScreenState extends State<AIChatScreen> {
   }
 
   void createInlineBannerAd() {
-    _inlineBannerAd = BannerAd(size: AdSize.mediumRectangle,
+    _inlineBannerAd = BannerAd(size: AdSize.banner,
         adUnitId: AdHelper.bannerAdUnitId2,
         listener: BannerAdListener(onAdLoaded: (_) {
           setState(() {
@@ -137,19 +137,13 @@ class _AIChatScreenState extends State<AIChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: isBannerAdLoaded
-          ? Container(
-        height: _bottomBannerAd.size.height.toDouble(),
-        width: _bottomBannerAd.size.width.toDouble(),
-        child: AdWidget(ad: _bottomBannerAd,),
-      )
-          : null,
       drawer: Drawer(
         child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
               ListTile(
                 onTap: () {
                   Navigator.pushNamed(context, SettingsScreen.screenName);
@@ -170,7 +164,15 @@ class _AIChatScreenState extends State<AIChatScreen> {
                   showAboutDialog(context: context);
                 },
                 title: const Text("About", style: TextStyle(fontSize: 16)),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image(image: AssetImage("assets/images/iconapp.png"),height: 50,width: 50,),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text("Developed by QutechSoft Inc, 2023"),
+              ),
             ],
           ),
         ),
@@ -188,6 +190,13 @@ class _AIChatScreenState extends State<AIChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            isBannerAdLoaded
+                ? Container(
+              height: _bottomBannerAd.size.height.toDouble(),
+              width: _bottomBannerAd.size.width.toDouble(),
+              child: AdWidget(ad: _bottomBannerAd,),
+            )
+                : SizedBox(),
             Flexible(
                 child: SizedBox(
                   child: ListView.builder(
@@ -203,13 +212,14 @@ class _AIChatScreenState extends State<AIChatScreen> {
                           activateAd=false;
                           return Column(
                             children: [
-                              Container(
-                                padding: EdgeInsets.only(bottom: 10),
+                              _messages[index],
+                              SizedBox(height: 4,),
+                              SizedBox(
                                 width: _inlineBannerAd.size.width.toDouble(),
                                 height: _inlineBannerAd.size.height.toDouble(),
                                 child: AdWidget(ad: _inlineBannerAd),
                               ),
-                              _messages[index]
+
                             ],
                           );
                         }
