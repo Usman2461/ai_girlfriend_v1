@@ -1,8 +1,10 @@
 import 'package:ai_girlfriend_v1/widgets/c_text_field.dart';
 import 'package:ai_girlfriend_v1/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helpers/ad_helper.dart';
 import '../ai_chat_screen/ai_chat_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -17,12 +19,29 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   TextEditingController myNameController = TextEditingController();
   TextEditingController myPartnerController = TextEditingController();
+  late BannerAd _bottomBannerAd;
+  bool isBannerAdLoaded = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getData();
+  }
+
+  void createBtmBannerAd() {
+    _bottomBannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: AdHelper.bannerAdUnitId3,
+        listener: BannerAdListener(onAdLoaded: (_) {
+          setState(() {
+            isBannerAdLoaded = true;
+          });
+        }, onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+        }),
+        request: AdRequest());
+    _bottomBannerAd.load();
   }
 
   @override
@@ -37,6 +56,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              isBannerAdLoaded
+                  ? Container(
+                height: _bottomBannerAd.size.height.toDouble(),
+                width: _bottomBannerAd.size.width.toDouble(),
+                child: AdWidget(ad: _bottomBannerAd,),
+              )
+                  : SizedBox(),
               const SizedBox(height: 20,),
               CTextField(controller: myNameController, label: "User Name"),
               Padding(
