@@ -71,7 +71,7 @@ class _AIChatScreenState extends State<AIChatScreen> {
     try {
       subscription = openAI!
           .build(
-        token: "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",
+        token: "sk-lAPjMnowDJUIM87bRAb2T3BlbkFJmozQbeTND8GbCosdsdVuwKW2",
         baseOption: HttpSetup(receiveTimeout: 10000, connectTimeout: 10000),
       )
           .onCompleteStream(request: request)
