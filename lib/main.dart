@@ -2,6 +2,7 @@ import 'package:ai_girlfriend_v1/screens/ai_chat_screen/ai_chat_screen.dart';
 import 'package:ai_girlfriend_v1/screens/on_boarding_screens/on_board_ai_namee.dart';
 import 'package:ai_girlfriend_v1/screens/on_boarding_screens/on_boarding_gender.dart';
 import 'package:ai_girlfriend_v1/screens/on_boarding_screens/on_boarding_interests.dart';
+import 'package:ai_girlfriend_v1/screens/privacy_policy/privacy_policy.dart';
 import 'package:ai_girlfriend_v1/screens/settings/settings.dart';
 import 'package:ai_girlfriend_v1/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         AIChatScreen.screenName: (context) =>AIChatScreen(),
         PartnerNameScreen.screenName: (context) =>PartnerNameScreen(),
         SettingsScreen.screenName: (context) =>SettingsScreen(),
+        PrivacyPolicy.screenName: (context) =>PrivacyPolicy(),
 
       },
     );

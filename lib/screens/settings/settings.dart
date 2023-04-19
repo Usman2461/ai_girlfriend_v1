@@ -27,6 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // TODO: implement initState
     super.initState();
     getData();
+    createBtmBannerAd();
   }
 
   void createBtmBannerAd() {

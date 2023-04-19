@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:ai_girlfriend_v1/helpers/ad_helper.dart';
+import 'package:ai_girlfriend_v1/screens/privacy_policy/privacy_policy.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -155,7 +156,9 @@ class _AIChatScreenState extends State<AIChatScreen> {
               ),
               const Divider(),
               ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, PrivacyPolicy.screenName);
+                  },
                   title: const Text("Privacy Policy",
                       style: TextStyle(fontSize: 16))),
               Divider(),
